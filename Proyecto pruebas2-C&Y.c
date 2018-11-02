@@ -54,10 +54,9 @@ char funposi2(){//poner nave en Vertical, arriba o abajo
 	  }
 
 }
-}
+
 char funposi3(){//poner naves horizontas, izquierda o derecha
 	int i,j;
-	 if (let1 =='H'){
 	  if (let3=='I'){
 	      if (numna==0||numna==1){
 		      matrizpo1[fila][colum-1]='X';}
@@ -84,7 +83,7 @@ char funposi3(){//poner naves horizontas, izquierda o derecha
 
 }
 
-}
+
 void ImprimirBarco(){
     system ("cls");
     printf ("\t                                               _______                                                  \n");
@@ -142,12 +141,11 @@ int main (){
        }
        printf ("\n\t____________________________________________________________");
    }
-        for(i=0;i<5;i++){ //numero de naves
+        for(i=0;i<2;i++){ //numero de naves
         printf ("\nNave %i :\n\t",(i+1));
         numna=i;
-        scanf("%s",&letra);
+        scanf("%s %i",&letra,&num);
         printf("\t");
-        scanf("%i",&num);
         funletran();
         while (matrizpo1[num-1][lenum]=='X'){
 	          printf("POSICION EN USO\n");
@@ -180,7 +178,7 @@ int main (){
        		printf("\nIngresa otra vez:\t");
             scanf ("%s", &let3);
      }
-        funposi3();
+       funposi3();
      }
 
     }
