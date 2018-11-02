@@ -28,7 +28,6 @@ char funletran(){//transformar de letra a numero
 }
 char funposi2(){//poner nave en Vertical, arriba o abajo
 	int i,j;
-    if (let1 =='V'){
 	  if (let2=='A'){
 	      if (numna==0||numna==1){
 		      matrizpo1[fila-1][colum]='X';}
