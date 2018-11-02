@@ -107,13 +107,13 @@ void ImprimirBarco(){
 
 
 int main (){
-    int i, j,k;
+    int i, j,k,opc;
+    opc=0;
     char name1[15];
     char name2[15];
     ImprimirBarco();
     printf ("BIENVENIDO A BATTLESHIP\n\n");
 
-    printf ("Por favor siga las indicaciones\n");
 
     printf ("REGLAS DEL JUEGO\n");
     printf ("\t1. Las naves se colocan en posicion horizontal y vertical (no diagonal).\n\t2. No repetir las mismas coordenadas.\n\t3. Colocar las naves dentro del tablero.\n\t5. No colocar las naves una sobre otra\n");
