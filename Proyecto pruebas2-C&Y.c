@@ -47,10 +47,26 @@ char funposi2(){//poner nave en Vertical, arriba o abajo
 	int i,j;
 	  if (let2=='A'){
 	      if (numna==0||numna==1){
-		      matrizpo1[fila-1][colum]='X';}
+                if (matrizpo1[fila-1][colum-1]=='X'){//Si la posicion en horizontal new ya exitia llamo a la funcion funexist para volver a ingresar una posicion inicial//
+				    funexist();
+				    matrizpo1[fila][colum]='X';
+				    matrizpo1[fila-1][colum]='X';
+					}
+				else{
+				  matrizpo1[fila-1][colum]='X';}
+	      }
+
 		  else if (numna==2 || numna==3){
-		  	matrizpo1[fila-1][colum]='X';//La variable fila y colum guarda la posicion leida por primera vez y asi restarle o sumarle si es vertical arriba o abajo
+		      if (matrizpo1[fila-1][colum]=='X' || matrizpo1[fila][colum-2]=='X'){
+		  			funexist();
+				    matrizpo1[fila][colum]='X';
+				    matrizpo1[fila-1][colum]='X';
+				    matrizpo1[fila-2][colum]='X';
+		  		}
+		  		else {
+		  	matrizpo1[fila-1][colum]='X';//si es izquierda le resta 1 o 2 o 3, a la posicion primera y si no, le suma
 			matrizpo1[fila-2][colum]='X';}
+		  }
 		  else{
 			matrizpo1[fila-1][colum]='X';
 		    matrizpo1[fila-2][colum]='X';
@@ -70,7 +86,6 @@ char funposi2(){//poner nave en Vertical, arriba o abajo
 	  }
 
 }
-
 char funposi3(){//poner naves horizontas, izquierda o derecha
 	int i,j;
 	  if (let3=='I'){
@@ -83,7 +98,7 @@ char funposi3(){//poner naves horizontas, izquierda o derecha
 				else{
 				  matrizpo1[fila][colum-1]='X';}}
 		  else if (numna==2 || numna==3){
-		  		if (matrizpo1[fila][colum-1]=='X' || matrizpo1[fila][colum-2]=='X'){
+		  		if (matrizpo1[fila-1][colum]=='X' || matrizpo1[fila-2][colum]=='X'){
 		  			funexist();
 				    matrizpo1[fila][colum]='X';
 				    matrizpo1[fila][colum-1]='X';
@@ -94,17 +109,17 @@ char funposi3(){//poner naves horizontas, izquierda o derecha
 			matrizpo1[fila][colum-2]='X';}
 			}
 		  else{
-		  		if (matrizpo1[fila][colum-1]=='X' || matrizpo1[fila][colum-2]=='X'||matrizpo1[fila][colum-3]=='X'){
+		  		if (matrizpo1[fila-1][colum]=='X' || matrizpo1[fila-2][colum]=='X'||matrizpo1[fila-3][colum]=='X'){
 		  			funexist();
 				    matrizpo1[fila][colum]='X';
-				    matrizpo1[fila][colum-1]='X';
-				    matrizpo1[fila][colum-2]='X';
-				    matrizpo1[fila][colum-3]='X';
+				    matrizpo1[fila-1][colum]='X';
+				    matrizpo1[fila-2][colum]='X';
+				    matrizpo1[fila-3][colum]='X';
 		  		}
 		  	else {
-			matrizpo1[fila][colum-1]='X';
-		    matrizpo1[fila][colum-2]='X';
-			matrizpo1[fila][colum-3]='X'; }}
+			matrizpo1[fila-1][colum]='X';
+		    matrizpo1[fila-2][colum]='X';
+			matrizpo1[fila-3][colum]='X'; }}
 	  }
 	  else{
 	      if (numna==0||numna==1)
