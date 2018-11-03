@@ -8,7 +8,22 @@ char matar2 [8][8];
 
 int lenum, num,fila,colum,numna;
 char letra, let1, let2,let3;
-char funletran(){//transformar de letra a numero
+char funexist(){
+matrizpo1[fila][colum]='.';
+printf("\n Hemos eliminado la posicion inicia, vuelve a ingresar otra\t");
+ scanf("%s %i",&letra,&num);
+ funletran();
+        while (matrizpo1[num-1][lenum]=='X'){
+	          printf("POSICION EN USO\n");
+	          scanf("%s",&letra);
+              scanf("%i",&num);
+			  funletran();
+       }
+  fila=num-1;
+  colum=lenum;
+
+}
+int funletran(){//transformar de letra a numero
  if (letra=='a' || letra == 'A')
 	  lenum=0;
   else if (letra=='b' || letra == 'B')
@@ -58,14 +73,36 @@ char funposi3(){//poner naves horizontas, izquierda o derecha
 	int i,j;
 	  if (let3=='I'){
 	      if (numna==0||numna==1){
-		      matrizpo1[fila][colum-1]='X';}
+				if (matrizpo1[fila][colum-1]=='X'){//Si la posicion en horizontal new ya exitia llamo a la funcion funexist para volver a ingresar una posicion inicial//
+				    funexist();
+				    matrizpo1[fila][colum]='X';
+				    matrizpo1[fila][colum-1]='X';
+					}
+				else{
+				  matrizpo1[fila][colum-1]='X';}}
 		  else if (numna==2 || numna==3){
+		  		if (matrizpo1[fila][colum-1]=='X' || matrizpo1[fila][colum-2]=='X'){
+		  			funexist();
+				    matrizpo1[fila][colum]='X';
+				    matrizpo1[fila][colum-1]='X';
+				    matrizpo1[fila][colum-2]='X';
+		  		}
+		  		else {
 		  	matrizpo1[fila][colum-1]='X';//si es izquierda le resta 1 o 2 o 3, a la posicion primera y si no, le suma
 			matrizpo1[fila][colum-2]='X';}
+			}
 		  else{
+		  		if (matrizpo1[fila][colum-1]=='X' || matrizpo1[fila][colum-2]=='X'||matrizpo1[fila][colum-3]=='X'){
+		  			funexist();
+				    matrizpo1[fila][colum]='X';
+				    matrizpo1[fila][colum-1]='X';
+				    matrizpo1[fila][colum-2]='X';
+				    matrizpo1[fila][colum-3]='X';
+		  		}
+		  	else {
 			matrizpo1[fila][colum-1]='X';
 		    matrizpo1[fila][colum-2]='X';
-			matrizpo1[fila][colum-3]='X';}
+			matrizpo1[fila][colum-3]='X'; }}
 	  }
 	  else{
 	      if (numna==0||numna==1)
@@ -134,13 +171,13 @@ int main (){
      printf ("\tA\t B\t C\t D\t E\t F\t G\t H");
      printf ("\n\t____________________________________________________________");
   for (i=0;i<8;i++){
-       printf ("\n %i", (k+1));
+       printf ("\n %i", (i+1));//CAMBIOOOOOOOOOOOOOO//
          for (j=0; j<8; j++){
              printf ("\t%c  |  ", matrizpo1 [i][j]);
        }
        printf ("\n\t____________________________________________________________");
    }
-        for(i=0;i<2;i++){ //numero de naves
+        for(i=0;i<5;i++){ //numero de naves
         printf ("\nNave %i :\n\t",(i+1));
         numna=i;
         scanf("%s %i",&letra,&num);
