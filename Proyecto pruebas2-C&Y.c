@@ -8,6 +8,8 @@ char matar2 [8][8];
 
 int lenum, num,fila,colum,numna;
 char letra, let1, let2,let3;
+
+
 char funletran(){//transformar de letra a numero
  if (letra=='a' || letra == 'A')
 	  lenum=0;
@@ -26,21 +28,68 @@ char funletran(){//transformar de letra a numero
   else if (letra=='h' || letra == 'H')
 	 lenum=7;
 }
+char funexist(){
+matrizpo1[fila][colum]='.';
+printf("\n Hemos eliminado la posicion inicia, vuelve a ingresar otra\t");
+ scanf("%s %i",&letra,&num);
+ funletran();
+        while (matrizpo1[num-1][lenum]=='X'){
+	          printf("POSICION EN USO\n");
+	          scanf("%s",&letra);
+              scanf("%i",&num);
+			  funletran();
+			  if (let1=='V'){
+            printf("\n \tA = Arriba  0 a= Abajo\t");
+            scanf ("%s", &let2);//let2 es arriba o abajo
+            while (let2!='A' && let2!='a'){
+       		printf("\nIngresa otra vez:\t");
+            scanf ("%s", &let2);
+     }
+       }
+        }
+  fila=num-1;
+  colum=lenum;
+
+}
+
 char funposi2(){//poner nave en Vertical, arriba o abajo
 	int i,j;
-    if (let1 =='V'){
 	  if (let2=='A'){
 	      if (numna==0||numna==1){
-		      matrizpo1[fila-1][colum]='X';}
+              if (matrizpo1[fila-1][colum]=='X'){//Si la posicion en horizontal new ya exitia llamo a la funcion funexist para volver a ingresar una posicion inicial//
+				    funexist();
+				    matrizpo1[fila][colum]='X';
+				    matrizpo1[fila-1][colum]='X';
+					}
+				else{
+				  matrizpo1[fila-1][colum]='X';}}
 		  else if (numna==2 || numna==3){
-		  	matrizpo1[fila-1][colum]='X';//La variable fila y colum guarda la posicion leida por primera vez y asi restarle o sumarle si es vertical arriba o abajo
+            if (matrizpo1[fila-1][colum]=='X' || matrizpo1[fila-2][colum]=='X'){
+		  			funexist();
+				    matrizpo1[fila][colum]='X';
+				    matrizpo1[fila-1][colum]='X';
+				    matrizpo1[fila-1][colum]='X';
+		  		}
+		  		else {
+		  	matrizpo1[fila-1][colum]='X';//si es izquierda le resta 1 o 2 o 3, a la posicion primera y si no, le suma
 			matrizpo1[fila-2][colum]='X';}
+		  	}
 		  else{
+		      if (matrizpo1[fila-1][colum]=='X' || matrizpo1[fila-2][colum]=='X'||matrizpo1[fila-3][colum]=='X'){
+		  			funexist();
+				    matrizpo1[fila][colum]='X';
+				    matrizpo1[fila-1][colum]='X';
+				    matrizpo1[fila-2][colum]='X';
+				    matrizpo1[fila-3][colum]='X';
+		  		}
+		  	else {
 			matrizpo1[fila-1][colum]='X';
 		    matrizpo1[fila-2][colum]='X';
-			matrizpo1[fila-3][colum]='X';}
+			matrizpo1[fila-3][colum]='X'; }
+	  }
 	  }
 	  else{
+
 	      if (numna==0||numna==1)
 		      matrizpo1[fila+1][colum]='X';
 		  else if (numna==2 || numna==3){
@@ -54,13 +103,14 @@ char funposi2(){//poner nave en Vertical, arriba o abajo
 	  }
 
 }
-}
+
 char funposi3(){//poner naves horizontas, izquierda o derecha
 	int i,j;
 	 if (let1 =='H'){
 	  if (let3=='I'){
 	      if (numna==0||numna==1){
-		      matrizpo1[fila][colum-1]='X';}
+		      matrizpo1[fila][colum-1]='X';
+	      }
 		  else if (numna==2 || numna==3){
 		  	matrizpo1[fila][colum-1]='X';//si es izquierda le resta 1 o 2 o 3, a la posicion primera y si no, le suma
 			matrizpo1[fila][colum-2]='X';}
@@ -79,10 +129,10 @@ char funposi3(){//poner naves horizontas, izquierda o derecha
 		    matrizpo1[fila][colum+1]='X';
 		    matrizpo1[fila][colum+2]='X';
 			matrizpo1[fila][colum+3]='X';}
-
 	  }
 
 }
+
 
 }
 void ImprimirBarco(){
@@ -110,6 +160,7 @@ void ImprimirBarco(){
 
 int main (){
     int i, j,k;
+    k=0;
     char name1[15];
     char name2[15];
     ImprimirBarco();
@@ -125,7 +176,7 @@ int main (){
     gets (name2);
     system ("cls");
     for(k=0;k<2;k++){
-	    printf("\n Jugador %i\n",(i+1));
+	    printf("\n Jugador %i\n",(k+1));
         printf ("Las naves son:\n\t Nave 1: ##\n\t Nave 2: ##  \n\t Nave 3: ###\n\t Nave 4: ###\n\t Nave 5: ####\n");
         printf ("\n Ingrese la posicion de sus naves\t\n");
         for (i=0;i<8;i++){
@@ -136,7 +187,7 @@ int main (){
      printf ("\tA\t B\t C\t D\t E\t F\t G\t H");
      printf ("\n\t____________________________________________________________");
   for (i=0;i<8;i++){
-       printf ("\n %i", (k+1));
+       printf ("\n %i", (i+1));
          for (j=0; j<8; j++){
              printf ("\t%c  |  ", matrizpo1 [i][j]);
        }
@@ -172,7 +223,7 @@ int main (){
             scanf ("%s", &let2);
      }
         funposi2();
-     }
+        }
      else{
 	   printf("\n \tI = Izquierda  0 D= Derecha\t");
 	     scanf ("%s", &let3);//let2 es arriba o abajo
@@ -198,4 +249,4 @@ int main (){
     system ("pause");
     system("cls");
     }
- }
+}
